@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English To Telegraph Language</title>
+    <link rel="icon" href="" type="image/icon type">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: #838583;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #inputText,
+        #outputText {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #a5ad2c;
+            border-radius: 5px;
+            background-color: rgb(230, 222, 222);
+        }
+
+        #outputText {
+            min-height: 100px;
+            white-space: pre-line;
+        }
+
+        .blink {
+            animation: blink-animation 1s steps(5, start) infinite;
+        }
+
+        @keyframes blink-animation {
+            to {
+                visibility: hidden;
+            }
+        }
+
+        #convertBtn {
+            padding: 10px 20px;
+            background-color: #ff0000;
+            border: none;
+            color: #47e707;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            max-width: 200px;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1> English To Telegraph Language</h1>
+        <textarea id="inputText" placeholder="Enter text to be converted"></textarea>
+        <button id="convertBtn" onclick="convertToTelegraph()">Convert</button>
+        <div id="outputText"></div>
+    </div>
+
+    <script>
+        function convertToTelegraph() {
+            var inputText = document.getElementById('inputText').value;
+            var outputText = document.getElementById('outputText');
+
+            // Map characters to Morse code equivalents
+            var morseCodeMap = {
+                'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-',
+                'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-',
+                'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..',
+                '0': '-----', '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.',
+                ' ': '/'
+            };
+
+            var telegraphText = '';
+            for (var i = 0; i < inputText.length; i++) {
+                var char = inputText.charAt(i).toUpperCase();
+                if (morseCodeMap[char]) {
+                    telegraphText += morseCodeMap[char] + ' ';
+                } else {
+                    telegraphText += '<span class="blink">' + char + '</span> ';
+                }
+            }
+
+            outputText.innerHTML = telegraphText;
+        }
+    </script>
+
+</body>
+
+</html>
